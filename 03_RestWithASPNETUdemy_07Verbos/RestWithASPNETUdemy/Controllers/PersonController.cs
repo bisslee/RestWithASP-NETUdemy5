@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace RestWithASPNETUdemy.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PersonController : ControllerBase
     {
 
@@ -67,7 +67,7 @@ namespace RestWithASPNETUdemy.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
              _personService.Delete(id);
