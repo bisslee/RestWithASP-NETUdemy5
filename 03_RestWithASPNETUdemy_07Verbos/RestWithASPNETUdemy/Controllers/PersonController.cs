@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace RestWithASPNETUdemy.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {
 
@@ -27,7 +28,7 @@ namespace RestWithASPNETUdemy.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_personService.FindAll()) ;
+            return Ok(_personService.FindAll());
         }
 
 
@@ -35,7 +36,7 @@ namespace RestWithASPNETUdemy.Controllers
         public IActionResult GetById(long id)
         {
             var person = _personService.FindById(id);
-            if (person==null )
+            if (person == null)
             {
                 return NotFound();
             }
@@ -45,17 +46,17 @@ namespace RestWithASPNETUdemy.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Person person)
         {
-            if (person==null)
+            if (person == null)
             {
                 return BadRequest();
             }
             var p = _personService.Create(person);
-           
+
             return Ok(p);
         }
 
         [HttpPut]
-        public IActionResult Put( [FromBody] Person person)
+        public IActionResult Put([FromBody] Person person)
         {
             if (person == null)
             {
@@ -70,8 +71,8 @@ namespace RestWithASPNETUdemy.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-             _personService.Delete(id);
-            
+            _personService.Delete(id);
+
             return NoContent();
         }
 
