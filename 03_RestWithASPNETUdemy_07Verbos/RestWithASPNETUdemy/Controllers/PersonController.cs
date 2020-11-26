@@ -9,12 +9,12 @@ namespace RestWithASPNETUdemy.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CalculatorController : ControllerBase
+    public class PersonController : ControllerBase
     {
 
-        private readonly ILogger<CalculatorController> _logger;
+        private readonly ILogger<PersonController> _logger;
 
-        public CalculatorController(ILogger<CalculatorController> logger)
+        public PersonController(ILogger<PersonController> logger)
         {
             _logger = logger;
         }
@@ -22,17 +22,12 @@ namespace RestWithASPNETUdemy.Controllers
         [HttpGet("sum/{firstnumber}/{secondnumber}")]
         public IActionResult Sum(string firstnumber, string secondnumber)
         {
-            if (IsNumeric(firstnumber)&& IsNumeric(secondnumber))
-            {
-                var sum = ConvertToDecimal(firstnumber) + ConvertToDecimal(secondnumber);
-                return Ok(sum.ToString());
-            }
             return BadRequest("Invalid Input");
         }
 
         private bool IsNumeric(string strNumber)
         {
-            double number;
+            double number; 
             bool isNumber = double.TryParse(strNumber
                 , System.Globalization.NumberStyles.Any
                 , System.Globalization.NumberFormatInfo.InvariantInfo
