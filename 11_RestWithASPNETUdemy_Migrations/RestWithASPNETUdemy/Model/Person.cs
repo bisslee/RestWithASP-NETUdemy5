@@ -10,7 +10,7 @@ namespace RestWithASPNETUdemy.Model
     public class Person
     {
         [Column("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Column("first_name")]
         public string FirstName { get; set; }
         [Column("last_name")]

@@ -8,33 +8,33 @@ using System.Threading.Tasks;
 
 namespace RestWithASPNETUdemy.Repository.Implementations
 {
-    public class PersonRepositoryImplemantation : IPersonRepository
+    public class BookRepositoryImplemantation : IBookRepository
     {
         private MySQLContext _context;
 
-        public PersonRepositoryImplemantation(MySQLContext context)
+        public BookRepositoryImplemantation(MySQLContext context)
         {
             _context = context;
         }
 
-        public List<Person> FindAll()
+        public List<Book> FindAll()
         {
-            return _context.Persons.ToList();
+            return _context.Books.ToList();
         }
 
-        public Person FindById(long id)
+        public Book FindById(long id)
         {
-            return _context.Persons.SingleOrDefault(p => p.Id==id);
+            return _context.Books.SingleOrDefault(p => p.Id==id);
         }
 
-        public Person Create(Person person)
+        public Book Create(Book book)
         {
 
             try
             {
-                _context.Add(person);
+                _context.Add(book);
                 _context.SaveChanges();
-                return person;
+                return book;
             }
             catch (Exception ex)
             {
@@ -44,17 +44,17 @@ namespace RestWithASPNETUdemy.Repository.Implementations
 
         }
 
-        public Person Update(Person person)
+        public Book Update(Book book)
         {
 
-            var result = FindById(person.Id);
+            var result = FindById(book.Id);
             if (result == null) return result;
 
             try
             {
-                _context.Entry(result).CurrentValues.SetValues(person);
+                _context.Entry(result).CurrentValues.SetValues(book);
                 _context.SaveChanges();
-                return person;
+                return book;
             }
             catch (Exception ex)
             {
@@ -68,7 +68,7 @@ namespace RestWithASPNETUdemy.Repository.Implementations
             var result = FindById(id);
             if (result != null)
             {
-                _context.Persons.Remove(result);
+                _context.Books.Remove(result);
                 _context.SaveChanges();
             }
 
@@ -76,7 +76,7 @@ namespace RestWithASPNETUdemy.Repository.Implementations
 
         public bool Exists(long id)
         {
-            return _context.Persons.Any(p => p.Id == id);
+            return _context.Books.Any(p => p.Id == id);
         }
     }
 }
